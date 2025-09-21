@@ -12,7 +12,7 @@ Would you like to give "kudos" to anyone who was particularly supportive or help
 -
 
 Cite any references used:
--hi
+- hi
 
 If you used AI, please describe how you used it and what the experienc taught you:
 -
