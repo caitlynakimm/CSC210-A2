@@ -8,6 +8,7 @@ public class Individual {
      * Each character represents a gene
      */
     ArrayList<Character> chromosome;
+    //int size;
 
     /**
      * Inital constructor to generate initial population members
@@ -15,7 +16,10 @@ public class Individual {
      * @param num_letters The number of letters available to choose from
      */
     public Individual(int c_0, int num_letters, Random rng) {
-
+        chromosome = new ArrayList<>(c_0);
+        for (int i = 0; i < c_0; i++) {
+            chromosome.add(randomLetter(num_letters, rng));
+        }
     }
 
     /**
@@ -26,6 +30,33 @@ public class Individual {
      * @param m The chances per round of mutation in each gene
      */
     public Individual(Individual parent1, Individual parent2, int c_max, float m, int num_letters, Random rng) {
+        chromosome = new ArrayList<>();
+
+        int prefixLength = rng.nextInt(parent1.chromosome.size()) + 1;
+        int suffixLength = rng.nextInt(parent2.chromosome.size()) + 1;
+        
+        for (int i = 0; i < prefixLength; i++) {
+            chromosome.add(parent1.chromosome.get(i));
+        }
+
+        //calculate the starting index for suffix, used as for loop's starting condition
+        int startSuffixIndex = parent2.chromosome.size() - suffixLength;
+        for (int i = startSuffixIndex; i < parent2.chromosome.size(); i++) {
+            chromosome.add(parent2.chromosome.get(i));
+        }
+
+        while (chromosome.size() > c_max) {
+            chromosome.remove(chromosome.size() - 1);
+        }
+
+        for (int i = 0; i < chromosome.size(); i++) {
+            if (doesMutate(num_letters, rng)) {
+                chromosome.set(i, randomLetter(num_letters, rng));
+            }
+
+        
+        }
+
     }
 
     /**
@@ -47,6 +78,10 @@ public class Individual {
     private Boolean doesMutate(float m, Random rng) {
         float randomNum = rng.nextInt(100) / 100f;
         return randomNum < m;
+    }
+
+    private int getFitness(Individual chromosome) {
+        
     }
 
     /**
