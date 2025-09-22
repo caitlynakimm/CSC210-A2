@@ -8,7 +8,6 @@ public class Individual {
      * Each character represents a gene
      */
     ArrayList<Character> chromosome;
-    //int size;
 
     /**
      * Inital constructor to generate initial population members
@@ -80,8 +79,38 @@ public class Individual {
         return randomNum < m;
     }
 
-    private int getFitness(Individual chromosome) {
+    public int getFitness() {
+        int fitness = 0;
+        int chromoSize = chromosome.size();
+    
+        //for loop for mirror comparison
+        for (int i = 0; i < chromoSize / 2; i++) {
+            char leftChar = chromosome.get(i);
+            char rightChar = chromosome.get(chromoSize - 1 - i);
+
+            if (leftChar == rightChar) {
+                fitness += 1;
+            }
+            else {
+                fitness -= 1;
+            }
+        }
         
+        if (chromoSize % 2 == 1) {
+            fitness += 1;
+        }
+
+        for (int i = 0; i < chromoSize; i++) {
+            char nextChar = chromosome.get(i+1);
+            char currentChar = chromosome.get(i);
+
+            if (nextChar == currentChar) {
+                fitness -= 1;
+            }
+        }
+
+        return fitness;
+
     }
 
     /**
@@ -95,7 +124,6 @@ public class Individual {
         }
         return builder.toString();
     }
-
 
 
 

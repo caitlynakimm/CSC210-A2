@@ -3,10 +3,10 @@
 Your readme should include the following information. Each student needs to submit all of this information themselves, even when pair programming. 
 
 Group Members:
--
+- Sierra Zhang
 
 Any peers and/or TAs/Tutors you collaborated with:
--
+- Sierra Zhang
 
 Would you like to give "kudos" to anyone who was particularly supportive or helpful?
 -
@@ -14,8 +14,8 @@ Would you like to give "kudos" to anyone who was particularly supportive or help
 Cite any references used:
 - hi
 
-If you used AI, please describe how you used it and what the experienc taught you:
--
+If you used AI, please describe how you used it and what the experience taught you:
+- I used AI to break down how to implement the getFitness method based on the instructions. I learned
 
 
 ## Questions

@@ -6,8 +6,46 @@ public class GA_Simulation {
 
   // Use the instructions to identify the class variables, constructors, and methods you need
   public static Random rng;
+  public ArrayList<Individual> population;
+  public int n;
+  public int k;
+  public int r;
+  public int c_0;
+  public int c_max;
+  public int g;
+  public float m;
 
+  public GA_Simulation(int n, int k, int r, int c_0, int c_max, int g, float m) {
+    this.population = new ArrayList<>();
+    this.n = n;
+    this.k = k;
+    this.r = r;
+    this.c_0 = c_0;
+    this.c_max = c_max;
+    this.g = g;
+    this.m = m;
+  }
 
+  public void init(Random rng) {
+    //Initialize population of chosen size
+    ArrayList<Individual> population = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      population.add(new Individual(c_0, k, rng));
+    }
+  }
+
+  public void evolve(){
+    rankPopulation(population);
+
+    ArrayList<Individual> newGen = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      int parent1Num = rng.nextInt(k);
+      int parent2Num = rng.nextInt(k);
+      Individual parent1 = population.get(parent1Num);
+      Individual parent2 = population.get(parent2Num);
+
+    }
+  }
 
   /** Provided method that prints out summary statistics for a given
    * generation, based on the information provided
