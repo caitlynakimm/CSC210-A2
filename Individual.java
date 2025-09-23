@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Represents an individual creature in a genetic algorithm
+ * Each individual has a chromosome made up of genes (characters)
+ * Allows creation of initial random individuals and reproduction between two parents
+ */
 public class Individual {
 
     /**
@@ -13,6 +18,7 @@ public class Individual {
      * Inital constructor to generate initial population members
      * @param c_0 The initial chromosome size
      * @param num_letters The number of letters available to choose from
+     * @param rng The random number generator for genetic randomization
      */
     public Individual(int c_0, int num_letters, Random rng) {
         chromosome = new ArrayList<>(c_0);
@@ -27,6 +33,8 @@ public class Individual {
      * @param parent2 The second parent chromosome
      * @param c_max The maximum chromosome size
      * @param m The chances per round of mutation in each gene
+     * @param num_letters The number of letters available for genes
+     * @param rng The random number generator for genetic randomization
      */
     public Individual(Individual parent1, Individual parent2, int c_max, float m, int num_letters, Random rng) {
         chromosome = new ArrayList<>();
@@ -49,7 +57,7 @@ public class Individual {
         }
 
         for (int i = 0; i < chromosome.size(); i++) {
-            if (doesMutate(num_letters, rng)) {
+            if (doesMutate(m, rng)) {
                 chromosome.set(i, randomLetter(num_letters, rng));
             }
 
@@ -79,11 +87,16 @@ public class Individual {
         return randomNum < m;
     }
 
+    /**
+     * Calculates and returns fitness score of individual
+     * Fitness calculated by mirror gene comparison and adjacent gene comparison
+     * @return The fitness score (integer)
+     */
     public int getFitness() {
         int fitness = 0;
         int chromoSize = chromosome.size();
     
-        //for loop for mirror comparison
+        //for loop for mirror gene comparison
         for (int i = 0; i < chromoSize / 2; i++) {
             char leftChar = chromosome.get(i);
             char rightChar = chromosome.get(chromoSize - 1 - i);
@@ -95,14 +108,15 @@ public class Individual {
                 fitness -= 1;
             }
         }
-        
+
         if (chromoSize % 2 == 1) {
             fitness += 1;
         }
 
-        for (int i = 0; i < chromoSize; i++) {
-            char nextChar = chromosome.get(i+1);
+        //for loop for comparing adjacent genes
+        for (int i = 0; i < chromoSize - 1; i++) {
             char currentChar = chromosome.get(i);
+            char nextChar = chromosome.get(i+1);
 
             if (nextChar == currentChar) {
                 fitness -= 1;
@@ -126,14 +140,14 @@ public class Individual {
     }
 
 
-
+    //Testing Individual constructor
     public static void main(String[] args) {
         // This code will set a random seed when you're testing Individual (i.e., running it without GA_Simulation)
         Random rng = new Random(System.currentTimeMillis());
 
         // You can pass rng, as defined above, to your constructors.
         Individual i = new Individual(8, 4, rng);
-
+        i.toString();
     }
 
 }
