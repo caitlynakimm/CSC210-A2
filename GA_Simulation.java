@@ -17,8 +17,8 @@ public class GA_Simulation {
   public int r;
   public int c_0;
   public int c_max;
-  public int g;
   public float m;
+  public int g;
 
   /**
    * Constructs a genetic algorithm simulation with given parameters
@@ -27,25 +27,24 @@ public class GA_Simulation {
    * @param r The number of evolution rounds to run
    * @param c_0 The initial chromosome size
    * @param c_max The maximum chromosome size
-   * @param g The number of possible gene states (called num_letters in Individual.java)
    * @param m The mutation rate per gene
+   * @param g The number of possible gene states (called num_letters in Individual.java)
    */
-  public GA_Simulation(int n, int k, int r, int c_0, int c_max, int g, float m) {
+  public GA_Simulation(int n, int k, int r, int c_0, int c_max, float m, int g) {
     this.population = new ArrayList<>();
     this.n = n;
     this.k = k;
     this.r = r;
     this.c_0 = c_0;
     this.c_max = c_max;
-    this.g = g;
     this.m = m;
+    this.g = g;
   }
 
   /**
    * Initializes population with randomly generated individuals
-   * @param rng The random number generator for making individuals
    */
-  public void init(Random rng) {
+  public void init() {
     //Initialize population of chosen size
     this.population = new ArrayList<>();
     for (int i = 0; i < n; i++) {
@@ -55,9 +54,8 @@ public class GA_Simulation {
 
   /**
    * Evolves population by selecting winners and creating a new generation
-   * @param rng The random number generator for selecting parents
    */
-  public void evolve(Random rng){
+  public void evolve(){
     rankPopulation(population);
 
     ArrayList<Individual> newGen = new ArrayList<>();
@@ -80,7 +78,6 @@ public class GA_Simulation {
    * @param kthFitness Fitness of kth-ranked individual
    * @param leastFitness Fitness of lowest-ranked (least fit) individual
    * @param best Individual with highest fitness
-   * @return Nothing, prints statistics to standard out
    */
   private void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
@@ -132,10 +129,10 @@ public class GA_Simulation {
    * Runs complete genetic algorithm simulation from initialization to final generation
    */
   public void run() {
-    this.init(rng);
+    this.init();
     this.describeGeneration(0); //initial population is at evolution round 0
     for (int round = 1; round <= r; round++) { //loops through evolution rounds 1 to r (inclusive)
-      this.evolve(rng);
+      this.evolve();
       this.describeGeneration(round);
     }
     Individual solution = this.population.get(0);
@@ -166,13 +163,13 @@ public class GA_Simulation {
 
     // Write your main below:
     //Tested three simulations with different parameters
-    GA_Simulation simuOne = new GA_Simulation(100, 15, 100, 8, 20, 5, .01f);
+    GA_Simulation simuOne = new GA_Simulation(100, 15, 100, 8, 20, .01f, 5);
     simuOne.run();
 
-    GA_Simulation simuTwo = new GA_Simulation(50, 15, 50, 8, 10, 5, .01f);
+    GA_Simulation simuTwo = new GA_Simulation(50, 15, 50, 8, 10, .01f, 5);
     simuTwo.run();
 
-    GA_Simulation simuThree = new GA_Simulation(25, 8, 15, 8, 7, 5, .01f);
+    GA_Simulation simuThree = new GA_Simulation(25, 8, 15, 8, 7, .01f, 5);
     simuThree.run();
   }
 
