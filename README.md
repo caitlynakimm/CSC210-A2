@@ -25,7 +25,7 @@ If you used AI, please describe how you used it and what the experience taught y
 ## Questions
 
 Please briefly describe what you observed about the "winners" produced by your genetic algorithm. Did changing the parameter values have any effect on what you observed?
-- I noticed that the "winners" were perfect palindromes even when I reduced the number of evolution rounds, winners per round, and population size. I did notice the palindromes would come in different forms, either consisting of two different letters (ex. CECECECECEECECECECEC, CACACACAC) or three different letters (ex.DCDEDCD). Of course when I decreased the parameter c_max, the final best chromosome was shorter than previous simulations. But I also noticed palindromes were generated pretty fast (ex. in 4-5 rounds) regardless, and those earlier ones had three different letters in them.
+- I noticed that the "winners" were perfect palindromes even when I reduced the number of evolution rounds, winners per round, and population size. I did notice the palindromes would come in different forms, either consisting of two different letters (ex. CECECECECEECECECECEC, CACACACAC) or three different letters (ex. DCDEDCD). Of course when I decreased the parameter c_max, the final best chromosome was shorter than previous simulations. But I also noticed palindromes were generated pretty fast (ex. in 4-5 rounds) regardless, and those earlier ones had three different letters in them.
 
 ## Reflection
 
