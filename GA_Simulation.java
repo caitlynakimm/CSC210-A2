@@ -98,15 +98,8 @@ public class GA_Simulation {
     Individual best = population.get(0);
     int bestFitness = best.getFitness();
     int leastFitness = population.get(population.size()-1).getFitness();
-    int kIndex;
-
-    // if (k - 1 < population.size()) {
-    //   kIndex = k - 1;
-    // } else {
-    //   kIndex = population.size() - 1; //if there isn't enough individuals to find kth-one, use last individual as backup
-    // }
-
     int kthFitness = population.get(k-1).getFitness();
+    
 
     printGenInfo(roundNumber, bestFitness, kthFitness, leastFitness, best);
   }
